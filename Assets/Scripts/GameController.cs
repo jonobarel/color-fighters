@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     public BulletController bulletController;
     public PlayerController playerController;
 
+    //TODO: figure out how to make this part more dynamic
     public Transform Player1Start;
     public Transform Player2Start;
 

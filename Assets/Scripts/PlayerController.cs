@@ -3,28 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class PlayerController : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameController gameController;
     private PlayerInputManager inputManager;
-    private Player player1;
-    private Player player2;
+    private List<Player> players;
+    private Vector2[] startPositions;
+    
+    private Color[] playerColors = {Color.red, Color.blue, Color.white, Color.yellow};
+
     void Awake(){
         inputManager = GetComponent<PlayerInputManager>();
+        players = new List<Player>();
+        startPositions = new Vector2[]{
+            gameController.Player1Start.position,
+            gameController.Player2Start.position
+            };
 
-        player1 = inputManager.JoinPlayer().GetComponent<Player>();
-        player2 = (Player)inputManager.JoinPlayer().GetComponent<Player>();
-
-        player1.GetComponent<Transform>().position = gameController.Player1Start.position;
-        player2.GetComponent<Transform>().position = gameController.Player2Start.position;
-        
-        player1.gameController = gameController;
-        player2.gameController = gameController;
-
-        player1.gameObject.SetActive(true);
-        player2.gameObject.SetActive(true);
+        for (int i = 0; i < 2; i++) {
+            AddPlayer();
+        }
         
     }
-  
+
+    void AddPlayer() {
+        int curr_player = players.Count;
+
+        Player new_player = inputManager.JoinPlayer().GetComponent<Player>(); 
+        
+        players.Add(new_player);
+
+        Debug.Log("Adding player "+curr_player+" with color: "+ playerColors[curr_player]);
+        
+        new_player.transform.position = startPositions[curr_player];
+        new_player.GetComponent<Player>().gameController = gameController;
+        new_player.GetComponentInChildren<SpriteRenderer>().color = playerColors[curr_player];
+        new_player.gameObject.SetActive(true);
+        
+        
+    }
 }
