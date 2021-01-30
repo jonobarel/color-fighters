@@ -128,7 +128,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1183060444818860951
 Transform:
   m_ObjectHideFlags: 0
@@ -243,7 +243,7 @@ MonoBehaviour:
     m_ActionName: UI/TrackedDeviceOrientation
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
+  m_DefaultActionMap: Player1
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &1183060444818860949
@@ -258,10 +258,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94811e39d86e9ac4481c334ecbe8ce2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 15
-  MAX_SPEED: 3
-  jump_force: 5
+  gameController: {fileID: 0}
   Anim: {fileID: 1183060444818860945}
+  bulletController: {fileID: 0}
 --- !u!50 &1183060444818860954
 Rigidbody2D:
   serializedVersion: 4
@@ -282,4 +281,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4

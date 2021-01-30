@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,6 +22,7 @@ public class BulletController : ColorFightersBase
         
         Bullet new_bullet = Instantiate(bulletClass, position, Quaternion.identity);
         
+
         Vector2 dir;
         if (is_left) {
             dir = Vector2.left;
@@ -29,8 +30,10 @@ public class BulletController : ColorFightersBase
             dir = Vector2.right;
         }
 
-        Debug.Log("Firing bullet in direction: "+ dir);
+        new_bullet.gameObject.SetActive(true);
+        
+        //Debug.Log("Firing bullet in direction: "+ dir);
         new_bullet.GetComponent<Rigidbody2D>().velocity = dir * BULLET_SPEED;
-
+        
     }
 }

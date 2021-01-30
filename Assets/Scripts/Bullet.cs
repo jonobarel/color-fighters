@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : ColorFightersBase
 {
     // Start is called before the first frame update
-    private PlayerController owner;
+    private Player owner;
     void Start()
     {
         
