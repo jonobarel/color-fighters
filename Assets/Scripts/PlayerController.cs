@@ -9,10 +9,14 @@ public class PlayerController : ColorFightersBase
     private SpriteRenderer sr;
     private float movementX;
     
-    
-    public float acceleration = 10.0f; //TODO: move to gameconfig
-    private float MAX_SPEED = 10.0f; //TODO: move to gameconfig
-    public float jump_force = 10.0f; //TODO: move to gameconfig
+    //instance constants
+    [Header("gameplay constants")]
+    private float ACCELERATION;
+    private float MAX_SPEED;
+    private float JUMP_FORCE;
+
+    //local variables
+    [Header("gameplay variables")]
     private bool to_jump = false;
     private bool can_jump = false;
     public Animator Anim;
@@ -26,6 +30,9 @@ public class PlayerController : ColorFightersBase
         sr = GetComponentInChildren<SpriteRenderer>();
         Debug.Log("Hero initiated");
         
+        ACCELERATION = gameController.config.PlayerAcceleration;
+        MAX_SPEED = gameController.config.PlayerMaxSpeed;
+        JUMP_FORCE = gameController.config.PlayerJumpForce;
 
     }
 
@@ -44,14 +51,14 @@ public class PlayerController : ColorFightersBase
         Anim.SetBool("isMoving", (movementX * movementX > 0.1f));
 
         Vector2 movement = new Vector2(movementX, 0.0f);
-        rb.AddForce(movement * acceleration);
+        rb.AddForce(movement * ACCELERATION);
 
         rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -MAX_SPEED, MAX_SPEED), rb.velocity.y);
 
-        Debug.Log("Horizontal velocity: "+rb.velocity.x);
+        //Debug.Log("Horizontal velocity: "+rb.velocity.x);
         
         if (to_jump && can_jump) {
-            rb.AddForce(Vector2.up * jump_force, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * JUMP_FORCE, ForceMode2D.Impulse);
             to_jump = false;
             can_jump = false;
         }
@@ -73,7 +80,7 @@ public class PlayerController : ColorFightersBase
     }
 
     public void OnJump(InputValue jumpValue){
-        Debug.Log("Jump action! " + jumpValue);
+        //Debug.Log("Jump action! " + jumpValue);
         if (can_jump) {
             to_jump = true;
         }
@@ -81,7 +88,7 @@ public class PlayerController : ColorFightersBase
 
     public void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("Platform")) {
-            Debug.Log("touched platform, setting can_jump to true");
+            //Debug.Log("touched platform, setting can_jump to true");
             can_jump = true;
          }
     }

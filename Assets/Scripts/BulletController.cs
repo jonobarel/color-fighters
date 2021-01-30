@@ -8,12 +8,29 @@ public class BulletController : ColorFightersBase
 
     // Update is called once per frame
 
-    public int MAX_BULLETS_PER_PLAYER = 3; //TODO - move this to gameconfig
+    private int MAX_BULLETS_PER_PLAYER = 3; //TODO - move this to gameconfig
     public Bullet bulletClass; 
-    public float BulletSpeed; //TODO - move to gameconfig
+    private float BULLET_SPEED; //TODO - move to gameconfig
+
+    void Start() {
+        MAX_BULLETS_PER_PLAYER = gameController.config.MaxBulletsPerPlayer;
+        BULLET_SPEED = gameController.config.BulletSpeed;
+    }
 
     public void fire(Vector2 position, bool is_left) {
-        //Bullet new_bullet = Instantiate(bulletClass, position, Quaternion.identity);
+        
+        
+        Bullet new_bullet = Instantiate(bulletClass, position, Quaternion.identity);
+        
+        Vector2 dir;
+        if (is_left) {
+            dir = Vector2.left;
+        } else {
+            dir = Vector2.right;
+        }
+
+        Debug.Log("Firing bullet in direction: "+ dir);
+        new_bullet.GetComponent<Rigidbody2D>().velocity = dir * BULLET_SPEED;
 
     }
 }
