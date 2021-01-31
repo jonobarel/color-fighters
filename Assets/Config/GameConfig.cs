@@ -9,12 +9,18 @@ public class GameConfig : ScriptableObject
     public float PlayerMaxSpeed;
     public float PlayerJumpForce;
     public float PlayerAcceleration;
+    public float GravityMultiplier;
+    public int PlayerLives;
 
     [Header("Bullets")]
     public float BulletSpeed;
-    public int MaxBulletsPerPlayer;
+    public float ShotCooldown;
     
-    [Header("General")]
-    public int PlayerLives;
-    public int MaxPlayers;
+    [Header("Powerup")]
+    public float PowerupShotSpeedMultiplier;
+    public float PowerupSizeMultiplier;
+
+    [Header("World")]
+    public float PowerupSpawnInterval;
+    
 }

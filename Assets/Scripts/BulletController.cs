@@ -8,12 +8,12 @@ public class BulletController : ColorFightersBase
 
     // Update is called once per frame
 
-    private int MAX_BULLETS_PER_PLAYER = 3; //TODO - move this to gameconfig
-    public Bullet bulletClass; 
+    private float SHOT_COOLDOWN;
     private float BULLET_SPEED; //TODO - move to gameconfig
+    public Bullet bulletClass; 
 
     void Start() {
-        MAX_BULLETS_PER_PLAYER = gameController.config.MaxBulletsPerPlayer;
+        SHOT_COOLDOWN = gameController.config.ShotCooldown;
         BULLET_SPEED = gameController.config.BulletSpeed;
     }
 

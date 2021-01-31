@@ -15,7 +15,7 @@ MonoBehaviour:
   PlayerMaxSpeed: 5
   PlayerJumpForce: 5
   PlayerAcceleration: 20
-  BulletSpeed: 15
+  BulletSpeed: 5
   MaxBulletsPerPlayer: 3
   PlayerLives: 0
   MaxPlayers: 2
