@@ -20,7 +20,7 @@ public class Player : ColorFightersBase
     private bool to_jump = false;
     private bool can_jump = false;
     public Animator Anim;
-    public BulletController bulletController;
+    //public BulletController bulletController;
     private bool to_fire = false;
 
     // Start is called before the first frame update
