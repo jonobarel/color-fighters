@@ -17,7 +17,7 @@ public class Player : ColorFightersBase
 
     //local variables
     [Header("gameplay variables")]
-    private bool to_jump = false;
+    //private bool to_jump = false;
     private bool can_jump = false;
     public Animator Anim;
     //public BulletController bulletController;
@@ -56,12 +56,12 @@ public class Player : ColorFightersBase
         rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -MAX_SPEED, MAX_SPEED), rb.velocity.y);
 
         //Debug.Log("Horizontal velocity: "+rb.velocity.x);
-        
+        /*
         if (to_jump && can_jump) {
-            rb.AddForce(Vector2.up * JUMP_FORCE, ForceMode2D.Impulse);
+            
             to_jump = false;
             can_jump = false;
-        }
+        }*/
         
     }
 
@@ -77,7 +77,9 @@ public class Player : ColorFightersBase
     public void OnJump(InputValue jumpValue){
         //Debug.Log("Jump action! " + jumpValue);
         if (can_jump) {
-            to_jump = true;
+            //to_jump = true;
+            rb.AddForce(Vector2.up * JUMP_FORCE, ForceMode2D.Impulse);
+            can_jump = false;
         }
     }
 
