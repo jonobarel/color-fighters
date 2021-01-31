@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
 
     void Awake(){
         inputManager = GetComponent<PlayerInputManager>();
+        
         players = new List<Player>();
         startPositions = new Vector2[]{
             gameController.Player1Start.position,
@@ -32,7 +33,7 @@ public class PlayerController : MonoBehaviour
 //    void AddPlayer() {
     void OnPlayerJoined(PlayerInput new_player) {
         int curr_player = players.Count;
-
+        new_player.name = "Player " + (curr_player+1);
         //Player new_player = inputManager.JoinPlayer().GetComponent<Player>(); 
         
         players.Add(new_player.gameObject.GetComponent<Player>());
@@ -40,8 +41,8 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Adding player "+curr_player+" with color: "+ playerColors[curr_player]);
         
         new_player.transform.position = startPositions[curr_player];
-        new_player.GetComponent<Player>().gameController = gameController;
-        new_player.GetComponentInChildren<SpriteRenderer>().color = playerColors[curr_player];
+        new_player.GetComponent<ColorFightersBase>().gameController = gameController;
+        new_player.GetComponent<ColorFightersBase>().MyColor = playerColors[curr_player];
         new_player.gameObject.SetActive(true);
        
     }

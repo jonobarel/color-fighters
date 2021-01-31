@@ -18,3 +18,4 @@ MonoBehaviour:
   BulletSpeed: 15
   MaxBulletsPerPlayer: 3
   PlayerLives: 0
+  MaxPlayers: 2

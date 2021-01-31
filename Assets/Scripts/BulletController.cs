@@ -17,18 +17,21 @@ public class BulletController : ColorFightersBase
         BULLET_SPEED = gameController.config.BulletSpeed;
     }
 
-    public void fire(Vector2 position, bool is_left) {
+    public void fire(Vector2 position, bool is_left, Player owner) {
         
         
         Bullet new_bullet = Instantiate(bulletClass, position, Quaternion.identity);
         
-
+        new_bullet.owner = owner;
+        
         Vector2 dir;
         if (is_left) {
             dir = Vector2.left;
         } else {
             dir = Vector2.right;
         }
+
+        new_bullet.MyColor = owner.MyColor;
 
         new_bullet.gameObject.SetActive(true);
         

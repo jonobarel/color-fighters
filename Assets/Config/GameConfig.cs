@@ -16,4 +16,5 @@ public class GameConfig : ScriptableObject
     
     [Header("General")]
     public int PlayerLives;
+    public int MaxPlayers;
 }

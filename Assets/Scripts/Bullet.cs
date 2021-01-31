@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : ColorFightersBase
 {
     // Start is called before the first frame update
-    private Player owner;
+    public Player owner;
     void Start()
     {
         
@@ -15,5 +15,12 @@ public class Bullet : ColorFightersBase
     void Update()
     {
         
+    }
+
+    void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.tag == "Player" && other.gameObject.GetComponent<Player>() != owner ) { //register a hit
+            Debug.Log("Hit: " + owner.name + " --> " + other.gameObject.name);
+        }
+        Destroy(gameObject);
     }
 }

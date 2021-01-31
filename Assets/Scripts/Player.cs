@@ -21,13 +21,13 @@ public class Player : ColorFightersBase
     private bool can_jump = false;
     public Animator Anim;
     //public BulletController bulletController;
-    private bool to_fire = false;
+    //private bool to_fire = false;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        sr = GetComponentInChildren<SpriteRenderer>();
+        sr = GetComponent<SpriteRenderer>();
         Debug.Log("Hero initiated");
         
         ACCELERATION = gameController.config.PlayerAcceleration;
@@ -63,11 +63,6 @@ public class Player : ColorFightersBase
             can_jump = false;
         }
         
-        if(to_fire) {
-            gameController.fire(rb.transform.position, sr.flipX);
-            to_fire = false;
-        }
-
     }
 
     public void OnMove(InputValue movementValue)
@@ -94,6 +89,10 @@ public class Player : ColorFightersBase
     }
 
     public void OnFire(InputValue fireValue) {
-        to_fire = true;
+        gameController.fire(rb.transform.position, sr.flipX, GetComponent<Player>());
+    }
+
+    public Color GetColor() {
+        return sr.color;
     }
 }
