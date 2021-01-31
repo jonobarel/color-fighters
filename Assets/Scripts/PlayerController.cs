@@ -21,21 +21,19 @@ public class PlayerController : MonoBehaviour
             gameController.Player1Start.position,
             gameController.Player2Start.position
             };
-/*
+
         for (int i = 0; i < 2; i++) {
             AddPlayer();
         }
-*/
+        
     }
 
-
-//    void AddPlayer() {
-    void OnPlayerJoined(PlayerInput new_player) {
+    void AddPlayer() {
         int curr_player = players.Count;
 
-        //Player new_player = inputManager.JoinPlayer().GetComponent<Player>(); 
+        Player new_player = inputManager.JoinPlayer().GetComponent<Player>(); 
         
-        players.Add(new_player.gameObject.GetComponent<Player>());
+        players.Add(new_player);
 
         Debug.Log("Adding player "+curr_player+" with color: "+ playerColors[curr_player]);
         
@@ -43,6 +41,7 @@ public class PlayerController : MonoBehaviour
         new_player.GetComponent<Player>().gameController = gameController;
         new_player.GetComponentInChildren<SpriteRenderer>().color = playerColors[curr_player];
         new_player.gameObject.SetActive(true);
-       
+        
+        
     }
 }
