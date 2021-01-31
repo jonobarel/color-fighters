@@ -35,6 +35,7 @@ public class BulletController : ColorFightersBase
 
         new_bullet.gameObject.SetActive(true);
         
+        //Debug.Log("Firing bullet in direction: "+ dir);
         new_bullet.GetComponent<Rigidbody2D>().velocity = dir * BULLET_SPEED;
         
     }

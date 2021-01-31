@@ -12,7 +12,7 @@ public class ColorFightersBase : MonoBehaviour
     public Color MyColor {
         get {return myColor; }
         set {
-            //Debug.Log("Setting color for "+gameObject.name+": "+myColor);
+            Debug.Log("Setting color for "+gameObject.name+": "+myColor);
             myColor = GetComponent<SpriteRenderer>().color = value;
         }
     }
