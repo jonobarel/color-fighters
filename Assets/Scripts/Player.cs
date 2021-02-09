@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Player : ColorFightersBase
 {
-    private Rigidbody2D rb;
+    private Rigidbody rb;
     private SpriteRenderer sr;
     private float movementX;
     
@@ -26,7 +26,7 @@ public class Player : ColorFightersBase
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody>();
         sr = GetComponent<SpriteRenderer>();
         Debug.Log("Hero initiated");
         
@@ -39,21 +39,21 @@ public class Player : ColorFightersBase
     // Update is called once per frame
     void FixedUpdate()
     {
-        
         if (movementX > 0.0f) {
-            sr.flipX = false;
+            //sr.flipX = false;
         }
         else if (movementX < 0.0f) {
-            sr.flipX = true;
+            //sr.flipX = true;
         }
         
 
-        Anim.SetBool("isMoving", (movementX * movementX > 0.1f));
+        //Anim.SetBool("isMoving", (movementX * movementX > 0.1f));
+        Anim.SetFloat("Blend", movementX);
 
-        Vector2 movement = new Vector2(movementX, 0.0f);
+        Vector3 movement = new Vector3(movementX, 0.0f, 0.0f);
         rb.AddForce(movement * ACCELERATION);
 
-        rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -MAX_SPEED, MAX_SPEED), rb.velocity.y);
+        rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -MAX_SPEED, MAX_SPEED), rb.velocity.y, 0.0f);
 
         //Debug.Log("Horizontal velocity: "+rb.velocity.x);
         /*
@@ -67,7 +67,7 @@ public class Player : ColorFightersBase
 
     public void OnMove(InputValue movementValue)
     {
-        //Debug.Log("Move value: "+ movementValue.Get<Vector2>());
+        Debug.Log("Move value: "+ movementValue.Get<Vector2>());
         Vector2 movementVector = movementValue.Get<Vector2>();
 
         movementX = movementVector.x;
@@ -78,12 +78,12 @@ public class Player : ColorFightersBase
         //Debug.Log("Jump action! " + jumpValue);
         if (can_jump) {
             //to_jump = true;
-            rb.AddForce(Vector2.up * JUMP_FORCE, ForceMode2D.Impulse);
+            rb.AddForce(Vector3.up * JUMP_FORCE, ForceMode.Impulse);
             can_jump = false;
         }
     }
 
-    public void OnCollisionEnter2D(Collision2D other) {
+    public void OnCollisionEnter(Collision other) {
         if (other.gameObject.CompareTag("Platform")) {
             //Debug.Log("touched platform, setting can_jump to true");
             can_jump = true;
@@ -91,7 +91,7 @@ public class Player : ColorFightersBase
     }
 
     public void OnFire(InputValue fireValue) {
-        gameController.fire(rb.transform.position, sr.flipX, GetComponent<Player>());
+        //gameController.fire(rb.transform.position, sr.flipX, GetComponent<Player>());
     }
 
     public Color GetColor() {
