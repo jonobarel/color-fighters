@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3063497639159971849}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,8 +107,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 4, z: 1}
-  m_Center: {x: 0.0488801, y: 1.7430804, z: 0}
+  m_Size: {x: 1.0482365, y: 3.7760081, z: 1}
+  m_Center: {x: 0.024761856, y: 1.8783743, z: 0}
 --- !u!1001 &3212263923369597393
 PrefabInstance:
   m_ObjectHideFlags: 0

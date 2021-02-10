@@ -22,15 +22,10 @@ public class PlayerController : MonoBehaviour
             gameController.Player1Start,
             gameController.Player2Start
             };
-/*
-        for (int i = 0; i < 2; i++) {
-            AddPlayer();
-        }
-*/
+
     }
 
 
-//    void AddPlayer() {
     void OnPlayerJoined(PlayerInput new_player) {
         int curr_player = players.Count;
         new_player.name = "Player " + (curr_player+1);
@@ -42,7 +37,9 @@ public class PlayerController : MonoBehaviour
         
         new_player.transform.SetPositionAndRotation(startPositions[curr_player].position, startPositions[curr_player].rotation);
         new_player.GetComponent<ColorFightersBase>().gameController = gameController;
-        new_player.GetComponent<ColorFightersBase>().MyColor = playerColors[curr_player];
+
+        //TODO: replace recolouring with reskinning or applying colour to a material.
+        //new_player.GetComponent<ColorFightersBase>().MyColor = playerColors[curr_player]; 
         new_player.gameObject.SetActive(true);
        
     }
