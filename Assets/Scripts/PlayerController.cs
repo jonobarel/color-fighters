@@ -36,7 +36,8 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Adding player "+curr_player+" with color: "+ playerColors[curr_player]);
         
         new_player.transform.SetPositionAndRotation(startPositions[curr_player].position, startPositions[curr_player].rotation);
-        new_player.GetComponent<ColorFightersBase>().gameController = gameController;
+        
+        new_player.GetComponent<ColorFightersBase>().gameController = gameController; //why can't this be accessed directly in new_player? it should be inherited.
 
         //TODO: replace recolouring with reskinning or applying colour to a material.
         //new_player.GetComponent<ColorFightersBase>().MyColor = playerColors[curr_player]; 

@@ -7,18 +7,16 @@ public class Bullet : ColorFightersBase
 {
     // Start is called before the first frame update
     public Player owner;
-    public CanvasRenderer textBox;
     private Rigidbody rb;
+
+    new public Rigidbody rigidbody {
+        get {return rb;}
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
-
-    // Update is called once per frame
-        public void FixedUpdate() {
-        GetComponent<Rigidbody>().velocity = Vector3.right * 20;
-    }
-
 
     private void OnTriggerEnter(Collider other) {
 

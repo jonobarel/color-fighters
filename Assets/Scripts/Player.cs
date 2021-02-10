@@ -8,6 +8,8 @@ public class Player : ColorFightersBase
     private Rigidbody rb;
     private SkinnedMeshRenderer smr;
     private float movementX;
+    public Transform bullet_spawn;
+
     
     //instance constants
     [Header("gameplay constants")]
@@ -29,7 +31,7 @@ public class Player : ColorFightersBase
         rb = GetComponent<Rigidbody>();
         smr = GetComponentInChildren<SkinnedMeshRenderer>();
         Debug.Log("Hero initiated");
-        
+
         ACCELERATION = gameController.config.PlayerAcceleration;
         MAX_SPEED = gameController.config.PlayerMaxSpeed;
         JUMP_FORCE = gameController.config.PlayerJumpForce;
@@ -52,8 +54,6 @@ public class Player : ColorFightersBase
         rb.AddForce(movement * ACCELERATION);
 
         rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -MAX_SPEED, MAX_SPEED), rb.velocity.y, 0.0f);
-
-
         
     }
 
@@ -81,7 +81,7 @@ public class Player : ColorFightersBase
     }
 
     public void OnFire(InputValue fireValue) {
-        gameController.fire(rb.transform.position, player_facing_left, GetComponent<Player>());
+        gameController.fire(GetComponent<Player>());
     }
 
     /*public Color GetColor() {
