@@ -18,7 +18,7 @@ public class BulletController : ColorFightersBase
     void Start() {
         SHOT_COOLDOWN = gameController.config.ShotCooldown;
         BULLET_SPEED = gameController.config.BulletSpeed;
-        bulletStack = new Stack();
+        bulletStack = new Stack(8);
     }
 
     public void Fire(Player owner) {

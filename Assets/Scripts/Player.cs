@@ -17,7 +17,7 @@ public class Player : ColorFightersBase
     [SerializeField] private float JUMP_FORCE;
     [SerializeField] private float GRAVITY_MULTIPLIER;
     [SerializeField] private float SHOT_COOLDOWN;
-    private float lastBulletFired;
+    private float nextBulletWindow;
     
     private static float DEFAULT_TIME = -9999;
     private bool is_defending;
@@ -47,7 +47,7 @@ public class Player : ColorFightersBase
         GRAVITY_MULTIPLIER = gameController.config.GravityMultiplier;
         SHOT_COOLDOWN = gameController.config.ShotCooldown;
 
-        lastBulletFired = DEFAULT_TIME;
+        nextBulletWindow = 0.0f;
 
         rotation = transform.rotation;
 
@@ -118,9 +118,9 @@ public class Player : ColorFightersBase
     }
 
     public void OnFire(InputValue fireValue) {
-        if (lastBulletFired == DEFAULT_TIME || (Time.time - lastBulletFired) > SHOT_COOLDOWN) {
+        if (Time.time >= nextBulletWindow) {
             gameController.Fire(GetComponent<Player>());
-            lastBulletFired = Time.time;
+            nextBulletWindow = Time.time + SHOT_COOLDOWN;
         }
         
     }
