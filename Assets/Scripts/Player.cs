@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(PlayerInput))]
-
 public class Player : ColorFightersBase
 {
     private Rigidbody rb;
@@ -32,6 +30,10 @@ public class Player : ColorFightersBase
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        if (rb == null) {
+            Debug.LogError("Could not find Rigidbody in children objects of "+ gameObject.name);
+            Application.Quit();
+        }
         Debug.Log("Hero initiated");
 
         ACCELERATION = gameController.config.PlayerAcceleration;
@@ -65,7 +67,7 @@ public class Player : ColorFightersBase
         //TODO: replace with logic that animates or rotates the character gradually
         if (movementX * movementX > 0)
         {
-            Vector3 new_facing=new Vector3(movementVector.x,0,0);
+            Vector3 new_facing=new Vector3(movementVector.x,0,0).normalized;
             rotation = Quaternion.LookRotation(new_facing, Vector3.up);
         }
 
