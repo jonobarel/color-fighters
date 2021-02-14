@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletController : ColorFightersBase
@@ -9,31 +8,52 @@ public class BulletController : ColorFightersBase
     // Update is called once per frame
 
     private float SHOT_COOLDOWN;
-    private float BULLET_SPEED; //TODO - move to gameconfig
+    private Stack bulletStack;
+    private int bulletCounter = 0;
+
+    [SerializeField] private float BULLET_SPEED; //TODO - move to gameconfig
     public Bullet bulletClass; 
 
 
     void Start() {
         SHOT_COOLDOWN = gameController.config.ShotCooldown;
         BULLET_SPEED = gameController.config.BulletSpeed;
+        bulletStack = new Stack();
     }
 
-    public void fire(Player owner) {
+    public void Fire(Player owner) {
         
-        
-        Bullet new_bullet = Instantiate(bulletClass, owner.bullet_spawn.transform.position ,Quaternion.identity);
-        
+        Bullet new_bullet;
+
+        if (bulletStack.Count == 0) {//no bullets available
+            new_bullet = Instantiate(bulletClass);
+            new_bullet.name = "Bullet "+bulletCounter++;
+            new_bullet.gameController = gameController;
+        }
+        else {
+            new_bullet = (Bullet)bulletStack.Pop();
+        }
+
+        //new_bullet = Instantiate(bulletClass, owner.bullet_spawn.transform.position ,Quaternion.identity);
+        new_bullet.transform.position = owner.bullet_spawn.transform.position;
+        new_bullet.transform.rotation = Quaternion.identity;
         new_bullet.owner = owner;
+
 
         //TODO: replace bullet colour/material with player colour.
         //new_bullet.MyColor = owner.MyColor;
-
-        new_bullet.gameObject.SetActive(true);
 
         Vector3 firing_dir = owner.transform.forward;
 
         Debug.Log("Spawning a bullet at: " + new_bullet.transform.position + " with firing direction: " + firing_dir);
 
-        new_bullet.GetComponent<Rigidbody>().AddForce( firing_dir * BULLET_SPEED);
+        new_bullet.gameObject.SetActive(true);
+        new_bullet.GetComponent<Rigidbody>().AddForce( firing_dir * BULLET_SPEED, ForceMode.VelocityChange);
+    }
+
+    public void ReturnBullet(Bullet bullet) {
+        bullet.rigidbody.velocity = Vector3.zero;
+        bullet.gameObject.SetActive(false);
+        bulletStack.Push(bullet);
     }
 }

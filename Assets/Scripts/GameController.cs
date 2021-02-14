@@ -13,7 +13,19 @@ public class GameController : MonoBehaviour
     public Transform Player1Start;
     public Transform Player2Start;
 
-    public void fire(Player player){
-        bulletController.fire(player);
+    public void Fire(Player player){
+        bulletController.Fire(player);
+    }
+
+    public void RegisterHit(GameObject other, Bullet bullet) {
+        if (other.CompareTag("Player") && other != bullet.owner) {
+            Debug.Log(other.name + " hit");
+            PlayerHit(other.GetComponent<Player>());
+        }
+        bulletController.ReturnBullet(bullet);
+    }
+
+    public void PlayerHit(Player player) {
+        //TODO: write this method
     }
 }

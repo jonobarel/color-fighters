@@ -12,9 +12,12 @@ public class Player : ColorFightersBase
     
     //game constants
     [Header("gameplay constants")]
-    private float ACCELERATION;
-    private float MAX_SPEED;
-    private float JUMP_FORCE;
+    [SerializeField] private float ACCELERATION;
+    [SerializeField] private float MAX_SPEED;
+    [SerializeField] private float JUMP_FORCE;
+    [SerializeField] private float GRAVITY_MULTIPLIER;
+    
+    private bool is_defending;
 
 
     //instance variables
@@ -30,15 +33,14 @@ public class Player : ColorFightersBase
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        if (rb == null) {
-            Debug.LogError("Could not find Rigidbody in children objects of "+ gameObject.name);
-            Application.Quit();
-        }
+
         Debug.Log("Hero initiated");
 
         ACCELERATION = gameController.config.PlayerAcceleration;
         MAX_SPEED = gameController.config.PlayerMaxSpeed;
         JUMP_FORCE = gameController.config.PlayerJumpForce;
+        GRAVITY_MULTIPLIER = gameController.config.GravityMultiplier;
+
         rotation = transform.rotation;
 
     }
@@ -60,6 +62,19 @@ public class Player : ColorFightersBase
         //Debug.Log("Move value: "+ movementValue.Get<Vector2>());
         Vector2 movementVector = movementValue.Get<Vector2>();
 
+
+        if (movementVector.y < 0) {// crouching!
+            movementVector.x = 0; //ignore horizontal input
+            is_defending = true;
+            Debug.Log("Defending");
+        }
+        else {
+            if (is_defending){
+                Debug.Log("Stop defending");
+            }
+            is_defending = false;
+        }
+
         movementX = movementVector.x;
         //movementY = movementVector.y;
 
@@ -76,7 +91,7 @@ public class Player : ColorFightersBase
     public void OnJump(InputValue jumpValue){
         //Debug.Log("Jump action! " + jumpValue);
         if (can_jump) {
-            rb.AddForce(Vector3.up * JUMP_FORCE, ForceMode.Impulse);
+            rb.AddForce(Vector3.up * JUMP_FORCE / GRAVITY_MULTIPLIER, ForceMode.Impulse);
             can_jump = false;
         }
     }
@@ -84,11 +99,15 @@ public class Player : ColorFightersBase
     public void OnCollisionEnter(Collision other) {
         if (other.gameObject.CompareTag("Platform")) {
             can_jump = true;
+            
+            //maintain  horizontal velocity when hitting a platform to keep movement smooth
+            rb.velocity = new Vector3(-other.relativeVelocity.x,0,0);
          }
+
     }
 
     public void OnFire(InputValue fireValue) {
-        gameController.fire(GetComponent<Player>());
+        gameController.Fire(GetComponent<Player>());
     }
 
     /*public Color GetColor() {

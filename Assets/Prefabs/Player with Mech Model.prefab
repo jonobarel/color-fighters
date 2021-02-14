@@ -49,6 +49,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameController: {fileID: 0}
   bullet_spawn: {fileID: 6327354551757406428}
+  ACCELERATION: 0
+  MAX_SPEED: 0
+  JUMP_FORCE: 0
+  GRAVITY_MULTIPLIER: 0
   Anim: {fileID: 0}
 --- !u!114 &5313782054246943113
 MonoBehaviour:
@@ -134,7 +138,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4085031142078402324}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3313649465136014548}

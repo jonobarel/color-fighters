@@ -13,7 +13,8 @@ public class ColorFightersBase : MonoBehaviour
         get {return myColor; }
         set {
             Debug.Log("Setting color for "+gameObject.name+": "+myColor);
-            myColor = GetComponent<SpriteRenderer>().color = value;
+            //TODO: rewrite this for MeshRenderer material color
+            //myColor = GetComponent<SpriteRenderer>().color = value;
         }
     }
 
