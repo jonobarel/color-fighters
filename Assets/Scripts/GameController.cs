@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour
     public Transform Player1Start;
     public Transform Player2Start;
 
-    public void fire(Vector2 pos, bool is_left, Player player){
-        bulletController.fire(pos, is_left, player);
+    public void fire(Player player){
+        bulletController.fire(player);
     }
 }

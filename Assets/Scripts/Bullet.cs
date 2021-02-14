@@ -1,24 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Bullet : ColorFightersBase
 {
     // Start is called before the first frame update
     public Player owner;
+    private Rigidbody rb;
+
+    new public Rigidbody rigidbody {
+        get {return rb;}
+    }
+
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerEnter(Collider other) {
 
         Player other_player = other.gameObject.GetComponent<Player>();
 

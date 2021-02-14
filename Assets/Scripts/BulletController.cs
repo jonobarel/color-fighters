@@ -12,31 +12,28 @@ public class BulletController : ColorFightersBase
     private float BULLET_SPEED; //TODO - move to gameconfig
     public Bullet bulletClass; 
 
+
     void Start() {
         SHOT_COOLDOWN = gameController.config.ShotCooldown;
         BULLET_SPEED = gameController.config.BulletSpeed;
     }
 
-    public void fire(Vector2 position, bool is_left, Player owner) {
+    public void fire(Player owner) {
         
         
-        Bullet new_bullet = Instantiate(bulletClass, position, Quaternion.identity);
+        Bullet new_bullet = Instantiate(bulletClass, owner.bullet_spawn.transform.position ,Quaternion.identity);
         
         new_bullet.owner = owner;
-        
-        Vector2 dir;
-        if (is_left) {
-            dir = Vector2.left;
-        } else {
-            dir = Vector2.right;
-        }
 
-        new_bullet.MyColor = owner.MyColor;
+        //TODO: replace bullet colour/material with player colour.
+        //new_bullet.MyColor = owner.MyColor;
 
         new_bullet.gameObject.SetActive(true);
-        
-        //Debug.Log("Firing bullet in direction: "+ dir);
-        new_bullet.GetComponent<Rigidbody2D>().velocity = dir * BULLET_SPEED;
-        
+
+        Vector3 firing_dir = owner.transform.forward;
+
+        Debug.Log("Spawning a bullet at: " + new_bullet.transform.position + " with firing direction: " + firing_dir);
+
+        new_bullet.GetComponent<Rigidbody>().AddForce( firing_dir * BULLET_SPEED);
     }
 }
