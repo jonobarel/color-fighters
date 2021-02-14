@@ -17,8 +17,8 @@ MonoBehaviour:
   PlayerAcceleration: 20
   GravityMultiplier: 1
   PlayerLives: 0
-  BulletSpeed: 10.6
-  ShotCooldown: 1.5
+  BulletSpeed: 15
+  ShotCooldown: 0.5
   PowerupShotSpeedMultiplier: 0
   PowerupSizeMultiplier: 0
   PowerupSpawnInterval: 0
