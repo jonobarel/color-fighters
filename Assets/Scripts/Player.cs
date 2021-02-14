@@ -18,13 +18,15 @@ public class Player : ColorFightersBase
     [SerializeField] private float GRAVITY_MULTIPLIER;
     
     private bool is_defending;
+    public bool IsDefending {
+        get {return is_defending;}
+    }
 
 
     //instance variables
     [Header("gameplay variables")]
     private bool can_jump = false;
     private Quaternion rotation;
-
     public Animator Anim;
     //public BulletController bulletController;
     //private bool to_fire = false;
@@ -66,11 +68,14 @@ public class Player : ColorFightersBase
         if (movementVector.y < 0) {// crouching!
             movementVector.x = 0; //ignore horizontal input
             is_defending = true;
+            PlayerDefend();
             Debug.Log("Defending");
+            
         }
         else {
             if (is_defending){
                 Debug.Log("Stop defending");
+                PlayerStopDefending();
             }
             is_defending = false;
         }
@@ -113,5 +118,12 @@ public class Player : ColorFightersBase
     /*public Color GetColor() {
         return renderer.color;
     }*/
+    private void PlayerDefend() {
+        transform.localScale=new Vector3(1f,0.8f,1f);
+    }
+
+    private void PlayerStopDefending() {
+        transform.localScale=new Vector3(1f,1f,1f);
+    }
 
 }

@@ -26,6 +26,15 @@ public class GameController : MonoBehaviour
     }
 
     public void PlayerHit(Player player) {
-        //TODO: write this method
+        if (player.IsDefending) {
+            //TODO: animate a strong defense
+            Debug.Log(player.name + " defended!");
+            return; //nothing happens
+        }
+        else {
+            Debug.Log(player.name + "is dead!");
+            //play death animation;
+            //handle death logic
+        }
     }
 }

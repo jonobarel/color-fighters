@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour
             gameController.Player1Start,
             gameController.Player2Start
             };
-
     }
 
 

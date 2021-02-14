@@ -19,8 +19,6 @@ public class Bullet : ColorFightersBase
     }
 
     private void OnTriggerEnter(Collider other) {
-
-        Debug.Log("Bullet " + gameObject.name + " collided with " + other.name);
         gameController.RegisterHit(other.gameObject, gameObject.GetComponent<Bullet>());
     }
 

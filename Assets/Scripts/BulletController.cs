@@ -34,11 +34,9 @@ public class BulletController : ColorFightersBase
             new_bullet = (Bullet)bulletStack.Pop();
         }
 
-        //new_bullet = Instantiate(bulletClass, owner.bullet_spawn.transform.position ,Quaternion.identity);
         new_bullet.transform.position = owner.bullet_spawn.transform.position;
         new_bullet.transform.rotation = Quaternion.identity;
         new_bullet.owner = owner;
-
 
         //TODO: replace bullet colour/material with player colour.
         //new_bullet.MyColor = owner.MyColor;
@@ -48,7 +46,7 @@ public class BulletController : ColorFightersBase
         Debug.Log("Spawning a bullet at: " + new_bullet.transform.position + " with firing direction: " + firing_dir);
 
         new_bullet.gameObject.SetActive(true);
-        new_bullet.GetComponent<Rigidbody>().AddForce( firing_dir * BULLET_SPEED, ForceMode.VelocityChange);
+        new_bullet.GetComponent<Rigidbody>().AddForce(firing_dir * BULLET_SPEED, ForceMode.VelocityChange);
     }
 
     public void ReturnBullet(Bullet bullet) {
