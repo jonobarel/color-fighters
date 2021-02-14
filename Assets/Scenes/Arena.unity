@@ -681,6 +681,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameController: {fileID: 1569693904}
+  BULLET_SPEED: 0
   bulletClass: {fileID: -6658640824824080722, guid: 0d47dd6ce37f0ec48a37c55dbb0b862e,
     type: 3}
 --- !u!4 &1887300567
