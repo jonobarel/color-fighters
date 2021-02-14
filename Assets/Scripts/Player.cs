@@ -119,10 +119,12 @@ public class Player : ColorFightersBase
         return renderer.color;
     }*/
     private void PlayerDefend() {
+        //TODO: implement this properly
         transform.localScale=new Vector3(1f,0.8f,1f);
     }
 
     private void PlayerStopDefending() {
+        //TODO: implement this properly
         transform.localScale=new Vector3(1f,1f,1f);
     }
 
