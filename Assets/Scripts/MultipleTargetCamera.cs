@@ -14,11 +14,15 @@ public class MultipleTargetCamera : MonoBehaviour
     [SerializeField] private float maxZoom = 10f;
     [SerializeField] private float limitZoom = 50f;
 
+    public List<Transform> Targets {
+        get {return targets;}
+    }
     private Vector3 velocity;
     private Camera camera;
 
     void Start() {
         camera = GetComponent<Camera>();
+        targets = new List<Transform>();
     }
     void LateUpdate() {
         MoveCamera();

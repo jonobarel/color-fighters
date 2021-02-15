@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour
 {
 
     public GameConfig config;
+    public MultipleTargetCamera cam;
     [SerializeField] private BulletController bulletController;
     [SerializeField] private PlayerController playerController;
 
@@ -18,6 +19,8 @@ public class GameController : MonoBehaviour
     public void Fire(Player player){
         bulletController.Fire(player);
     }
+
+    
 
     public void Awake() {
         if (!(PlayerPrefab && Player1Start && Player2Start)) { //ensure that all these variables are populated
@@ -46,5 +49,17 @@ public class GameController : MonoBehaviour
             //play death animation;
             //handle death logic
         }
+    }
+
+    public void PlayerJoined(Player np) {
+
+        np.GetComponent<ColorFightersBase>().gameController = gameObject.GetComponent<GameController>(); //why can't this be accessed directly in new_player? it should be inherited.
+
+        //TODO: replace recolouring with reskinning or applying colour to a material.
+        //new_player.GetComponent<ColorFightersBase>().MyColor = playerColors[curr_player]; 
+
+        np.gameObject.SetActive(true);
+
+        cam.Targets.Add(np.transform);
     }
 }
