@@ -35,6 +35,9 @@ public class GameController : MonoBehaviour
             Debug.Log(other.name + " hit");
             PlayerHit(other.GetComponent<Player>());
         }
+        else if (!other.CompareTag("Platform")) {
+            Debug.Log(other.name + " hit"); //TODO: Solve the bullets hitting player_skin instead of player collider.
+        }
         bulletController.ReturnBullet(bullet);
     }
 
@@ -45,7 +48,7 @@ public class GameController : MonoBehaviour
             return; //nothing happens
         }
         else {
-            Debug.Log(player.name + "is dead!");
+            Debug.Log(player.name + "is dead!   ");
             //play death animation;
             //handle death logic
         }

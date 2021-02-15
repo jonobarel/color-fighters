@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3839974236261630811}
   - component: {fileID: 5313782054246943113}
   - component: {fileID: 8099809263049051585}
+  - component: {fileID: 5300063488999881311}
   m_Layer: 0
   m_Name: PlayerSquishy
   m_TagString: Player
@@ -54,7 +55,6 @@ MonoBehaviour:
   JUMP_FORCE: 0
   GRAVITY_MULTIPLIER: 0
   SHOT_COOLDOWN: 0
-  Anim: {fileID: 0}
 --- !u!114 &5313782054246943113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,6 +102,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 64
   m_CollisionDetection: 0
+--- !u!135 &5300063488999881311
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3212263922244415318}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.7397672
+  m_Center: {x: 0, y: 0, z: 0.0034748316}
 --- !u!1 &4490181172589916826
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,32 +215,32 @@ PrefabInstance:
     - target: {fileID: 589931176292479405, guid: 7e649a7503645e547a18c93ac0154e92,
         type: 3}
       propertyPath: m_AABB.m_Center.x
-      value: -0.0007299185
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 589931176292479405, guid: 7e649a7503645e547a18c93ac0154e92,
         type: 3}
       propertyPath: m_AABB.m_Center.y
-      value: -0.19164515
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 589931176292479405, guid: 7e649a7503645e547a18c93ac0154e92,
         type: 3}
       propertyPath: m_AABB.m_Center.z
-      value: 0.00601089
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 589931176292479405, guid: 7e649a7503645e547a18c93ac0154e92,
         type: 3}
       propertyPath: m_AABB.m_Extent.x
-      value: 0.7370142
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 589931176292479405, guid: 7e649a7503645e547a18c93ac0154e92,
         type: 3}
       propertyPath: m_AABB.m_Extent.y
-      value: 0.78440225
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 589931176292479405, guid: 7e649a7503645e547a18c93ac0154e92,
         type: 3}
       propertyPath: m_AABB.m_Extent.z
-      value: 0.7393551
+      value: 0.75
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7560202747062963490, guid: 7e649a7503645e547a18c93ac0154e92, type: 3}
