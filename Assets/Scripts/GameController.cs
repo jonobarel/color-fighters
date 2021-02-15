@@ -1,22 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameController : MonoBehaviour
 {
-    // Start is called before the first frame update
+
     public GameConfig config;
-    public BulletController bulletController;
-    public PlayerController playerController;
+    [SerializeField] private BulletController bulletController;
+    [SerializeField] private PlayerController playerController;
 
     //TODO: figure out how to make this part more dynamic
     public Transform Player1Start;
     public Transform Player2Start;
 
+    public Player PlayerPrefab;
     public void Fire(Player player){
         bulletController.Fire(player);
     }
 
+    public void Awake() {
+        if (!(PlayerPrefab && Player1Start && Player2Start)) { //ensure that all these variables are populated
+            Debug.Log("Message from " + gameObject.name + "Missing parameters in PlayerPrefab, Player1Start or Player2Start");
+            Application.Quit();
+        }
+
+        GetComponentInChildren<PlayerInputManager>().playerPrefab = PlayerPrefab.gameObject;
+    }
     public void RegisterHit(GameObject other, Bullet bullet) {
         if (other.CompareTag("Player") && other != bullet.owner) {
             Debug.Log(other.name + " hit");
