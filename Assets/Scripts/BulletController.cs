@@ -42,6 +42,7 @@ public class BulletController : ColorFightersBase
         //new_bullet.MyColor = owner.MyColor;
 
         Vector3 firing_dir = owner.transform.forward;
+        firing_dir.y = 0; //fixes some minor wobbling for now TODO: remove this 
 
         Debug.Log("Spawning a bullet at: " + new_bullet.transform.position + " with firing direction: " + firing_dir);
 

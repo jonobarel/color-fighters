@@ -17,9 +17,8 @@ public class Player : ColorFightersBase
     [SerializeField] private float JUMP_FORCE;
     [SerializeField] private float GRAVITY_MULTIPLIER;
     [SerializeField] private float SHOT_COOLDOWN;
-    private float nextBulletWindow;
+    private float nextShotWindow;
     
-    private static float DEFAULT_TIME = -9999;
     private bool is_defending;
     public bool IsDefending {
         get {return is_defending;}
@@ -28,13 +27,11 @@ public class Player : ColorFightersBase
 
     //instance variables
     [Header("gameplay variables")]
-    private bool can_jump = false;
+    private bool is_grounded = false;
     private Quaternion rotation;
-    public Animator Anim;
-    //public BulletController bulletController;
-    //private bool to_fire = false;
 
-    // Start is called before the first frame update
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -47,7 +44,7 @@ public class Player : ColorFightersBase
         GRAVITY_MULTIPLIER = gameController.config.GravityMultiplier;
         SHOT_COOLDOWN = gameController.config.ShotCooldown;
 
-        nextBulletWindow = 0.0f;
+        nextShotWindow = 0.0f;
 
         rotation = transform.rotation;
 
@@ -70,8 +67,7 @@ public class Player : ColorFightersBase
         //Debug.Log("Move value: "+ movementValue.Get<Vector2>());
         Vector2 movementVector = movementValue.Get<Vector2>();
 
-
-        if (movementVector.y < 0) {// crouching!
+        if (movementVector.y < -0.5) {// crouching!
             movementVector.x = 0; //ignore horizontal input
             is_defending = true;
             PlayerDefend();
@@ -101,15 +97,15 @@ public class Player : ColorFightersBase
 
     public void OnJump(InputValue jumpValue){
         //Debug.Log("Jump action! " + jumpValue);
-        if (can_jump) {
+        if (is_grounded) {
             rb.AddForce(Vector3.up * JUMP_FORCE / GRAVITY_MULTIPLIER, ForceMode.Impulse);
-            can_jump = false;
+            is_grounded = false;
         }
     }
 
     public void OnCollisionEnter(Collision other) {
         if (other.gameObject.CompareTag("Platform")) {
-            can_jump = true;
+            is_grounded = true;
             
             //maintain  horizontal velocity when hitting a platform to keep movement smooth
             rb.velocity = new Vector3(-other.relativeVelocity.x,0,0);
@@ -118,9 +114,9 @@ public class Player : ColorFightersBase
     }
 
     public void OnFire(InputValue fireValue) {
-        if (Time.time >= nextBulletWindow) {
+        if (Time.time >= nextShotWindow) {
             gameController.Fire(GetComponent<Player>());
-            nextBulletWindow = Time.time + SHOT_COOLDOWN;
+            nextShotWindow = Time.time + SHOT_COOLDOWN;
         }
         
     }
