@@ -14,15 +14,16 @@ public class MultipleTargetCamera : MonoBehaviour
     [SerializeField] private float maxZoom = 10f;
     [SerializeField] private float limitZoom = 50f;
 
-    public List<Transform> Targets {
-        get {return targets;}
+    public List<Transform> Targets
+    {
+        get { return targets; }
     }
+
     private Vector3 velocity;
-    private Camera cam;
+    private Camera gameCamera;
 
     void Start() {
-        cam = GetComponent<Camera>();
-        targets = new List<Transform>();
+        gameCamera = GetComponent<Camera>();
     }
     void LateUpdate() {
         MoveCamera();
@@ -41,7 +42,7 @@ public class MultipleTargetCamera : MonoBehaviour
 
     void ZoomCamera() {
         float newZoom = Mathf.Lerp(maxZoom, minZoom, GetGreatestDistance() / limitZoom);
-        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, newZoom, Time.deltaTime);
+        gameCamera.fieldOfView = Mathf.Lerp(gameCamera.fieldOfView, newZoom, Time.deltaTime);
     }
 
     private Bounds EncapsulateBounds() {
