@@ -18,10 +18,10 @@ public class MultipleTargetCamera : MonoBehaviour
         get {return targets;}
     }
     private Vector3 velocity;
-    private Camera camera;
+    private Camera cam;
 
     void Start() {
-        camera = GetComponent<Camera>();
+        cam = GetComponent<Camera>();
         targets = new List<Transform>();
     }
     void LateUpdate() {
@@ -41,7 +41,7 @@ public class MultipleTargetCamera : MonoBehaviour
 
     void ZoomCamera() {
         float newZoom = Mathf.Lerp(maxZoom, minZoom, GetGreatestDistance() / limitZoom);
-        camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, newZoom, Time.deltaTime);
+        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, newZoom, Time.deltaTime);
     }
 
     private Bounds EncapsulateBounds() {

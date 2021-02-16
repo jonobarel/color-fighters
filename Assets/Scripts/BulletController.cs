@@ -16,6 +16,11 @@ public class BulletController : ColorFightersBase
 
 
     void Start() {
+        if (!bulletClass) {
+            Debug.LogError("missing bulletClass prefab");
+            Application.Quit(-1);
+        }
+
         SHOT_COOLDOWN = gameController.config.ShotCooldown;
         BULLET_SPEED = gameController.config.BulletSpeed;
         bulletStack = new Stack(8);

@@ -8,8 +8,8 @@ public class GameController : MonoBehaviour
 
     public GameConfig config;
     public MultipleTargetCamera cam;
-    [SerializeField] private BulletController bulletController;
-    [SerializeField] private PlayerController playerController;
+    private BulletController bulletController;
+    private PlayerController playerController;
 
     //TODO: figure out how to make this part more dynamic
     public Transform Player1Start;
@@ -21,10 +21,13 @@ public class GameController : MonoBehaviour
     }
 
     
-
     public void Awake() {
-        if (!(PlayerPrefab && Player1Start && Player2Start)) { //ensure that all these variables are populated
-            Debug.Log("Message from " + gameObject.name + "Missing parameters in PlayerPrefab, Player1Start or Player2Start");
+        bulletController = GetComponent<BulletController>();
+        playerController = GetComponent<PlayerController>();
+
+
+        if (!(PlayerPrefab && Player1Start && Player2Start && cam)) { //ensure that all these variables are populated
+            Debug.Log("Message from " + gameObject.name + "Missing parameters");
             Application.Quit();
         }
 

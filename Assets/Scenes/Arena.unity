@@ -762,6 +762,12 @@ PrefabInstance:
       objectReference: {fileID: 1361508765}
     - target: {fileID: 3828693432333601724, guid: 61e6e5ab3fa764c4d9ffb9fad3b8db07,
         type: 3}
+      propertyPath: config
+      value: 
+      objectReference: {fileID: 11400000, guid: 311cc31f9b162924a84b78a29abc3438,
+        type: 2}
+    - target: {fileID: 3828693432333601724, guid: 61e6e5ab3fa764c4d9ffb9fad3b8db07,
+        type: 3}
       propertyPath: Player1Start
       value: 
       objectReference: {fileID: 1574109477}
@@ -801,5 +807,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 8341896045837315809, guid: 61e6e5ab3fa764c4d9ffb9fad3b8db07,
+        type: 3}
+      propertyPath: bulletClass
+      value: 
+      objectReference: {fileID: -6658640824824080722, guid: 0d47dd6ce37f0ec48a37c55dbb0b862e,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61e6e5ab3fa764c4d9ffb9fad3b8db07, type: 3}

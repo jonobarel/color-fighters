@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-//[RequireComponent(typeof(SpriteRenderer))]
-
 public class ColorFightersBase : MonoBehaviour
 {
     public GameController gameController;
